@@ -51,31 +51,31 @@ android {
     buildTypes {
         release {
             // Enable ProGuard (R8) for code and resource shrinking
-            minifyEnabled true   // Enables code shrinking
-            shrinkResources true  // Removes unused resources
+            //minifyEnabled true   // Enables code shrinking
+            //shrinkResources true  // Removes unused resources
             signingConfig signingConfigs.release
 
             // Use default ProGuard rules and include custom ones
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     // Enable resource splitting based on ABI (architecture)
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64'  // Include only required ABIs
-            universalApk false  // Do not generate a universal APK
-        }
-    }
+//    splits {
+//        abi {
+//            enable truet
+//            reset()
+//            include 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64'  // Include only required ABIs
+//            universalApk false  // Do not generate a universal APK
+//        }
+//    }
 
     // Enable dynamic delivery and splits
-    bundle {
-        abi {
-            enableSplit = true
-        }
-    }
+//    bundle {
+//        abi {
+//            enableSplit = true
+//        }
+//    }
 }
 
 flutter {

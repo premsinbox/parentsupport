@@ -26,7 +26,7 @@ class MarkerController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    //preloadIcons(); // Preload icons once during initialization
+    preloadIcons(); // Preload icons once during initialization
   }
 
     @override
@@ -44,40 +44,57 @@ class MarkerController extends GetxController {
   }
 
 
-  // Future<void> preloadIcons() async {
-  //   if (_iconsPreloaded) return; // Prevent reloading icons if already done
+  Future<void> preloadIcons() async {
+    if (_iconsPreloaded) return; // Prevent reloading icons if already done
 
-  //   try {
-  //     log('Starting icon preloading...');
-  //     await Future.wait([
-  //       loadAndCacheIcon('assets/images/busrun.png', 'running'),
-  //       loadAndCacheIcon('assets/images/bushalt.png', 'halt'),
-  //       loadAndCacheIcon('assets/images/schoolicon.png', 'school'),
-  //       loadAndCacheIcon('assets/images/homeicon.png', 'home'),
-  //     ]);
-  //     _iconsPreloaded = true; // Mark as loaded
-  //     log('Icons preloaded successfully');
-  //   } catch (e) {
-  //     log('Error preloading icons: $e');
-  //   }
-  // }
-
-
+    try {
+      log('Starting icon preloading...');
+      await Future.wait([
+        loadAndCacheIcon('assets/images/busrun.png', 'running'),
+        loadAndCacheIcon('assets/images/bushalt.png', 'halt'),
+        loadAndCacheIcon('assets/images/schoolicon.png', 'school'),
+        loadAndCacheIcon('assets/images/homeicon.png', 'home'),
+      ]);
+      _iconsPreloaded = true; // Mark as loaded
+      log('Icons preloaded successfully');
+    } catch (e) {
+      log('Error preloading icons: $e');
+    }
+  }
 
 
-// Future<void> loadAndCacheIcon(String path, String key) async {
-//   try {
-//     final file = await DefaultCacheManager().getSingleFile(path);
-//     final bytes = await file.readAsBytes();
-//     final ui.Codec codec = await ui.instantiateImageCodec(bytes);
-//     final ui.FrameInfo fi = await codec.getNextFrame();
-//     final ui.Image resizedImage = await fi.image.toByteData(format: ImageByteFormat.png);
-//     _iconCache[key] = BitmapDescriptor.fromBytes(resizedImage.buffer.asUint8List());
-//     log('Icon $key cached successfully');
-//   } catch (e) {
-//     log('Error caching icon $path: $e');
-//   }
-// }
+
+  Future<void> loadAndCacheIcon(String path, String key) async {
+    try {
+      final ByteData data = await rootBundle.load(path);
+      final Uint8List bytes = data.buffer.asUint8List();
+      final ui.Codec codec = await ui.instantiateImageCodec(bytes);
+      final ui.FrameInfo fi = await codec.getNextFrame();
+      const Size targetSize = Size(100, 130); // Standard size
+
+      final pictureRecorder = ui.PictureRecorder();
+      final canvas = Canvas(pictureRecorder);
+      canvas.drawImageRect(
+          fi.image,
+          Rect.fromLTWH(
+              0, 0, fi.image.width.toDouble(), fi.image.height.toDouble()),
+          Rect.fromLTWH(0, 0, targetSize.width, targetSize.height),
+          Paint()..filterQuality = FilterQuality.high);
+
+      final picture = pictureRecorder.endRecording();
+      final ui.Image resizedImage = await picture.toImage(
+          targetSize.width.toInt(), targetSize.height.toInt());
+      final ByteData? resizedByteData =
+          await resizedImage.toByteData(format: ImageByteFormat.png);
+      if (resizedByteData != null) {
+        _iconCache[key] =
+            BitmapDescriptor.fromBytes(resizedByteData.buffer.asUint8List());
+        log('Icon $key resized successfully');
+      }
+    } catch (e) {
+      log('Error resizing icon $path: $e');
+    }
+  }
 
 
 

@@ -42,16 +42,16 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - assets/images/map.jpg
-  #   - assets/images/driver.png
-  #   - assets/images/incharge.png
-  #   - assets/images/house_location.png
-  #   - assets/images/bushalt.png
-  #   - assets/images/busrun.png
-  #   - assets/images/companylogo.png
-  #   - assets/images/homeicon.png
-  #   - assets/images/schoolicon.png
-  #   - assets/images/locationmarker.gif
-  #   - assets/images/barline.gif
+  assets:
+    - assets/images/map.jpg
+    - assets/images/driver.png
+    - assets/images/incharge.png
+    - assets/images/house_location.png
+    - assets/images/bushalt.png
+    - assets/images/busrun.png
+    - assets/images/companylogo.png
+    - assets/images/homeicon.png
+    - assets/images/schoolicon.png
+    - assets/images/locationmarker.gif
+    - assets/images/barline.gif
 
