@@ -1,0 +1,57 @@
+name: parentsupport
+description: "Parent Support app"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+
+dependencies:
+  avatar_glow: ^3.0.1
+  firebase_core: ^3.8.0
+  firebase_messaging: ^15.1.5
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^18.0.1
+  fluttertoast: ^8.2.8
+  geocoding: ^3.0.0
+  geolocator: ^13.0.1
+  get: ^4.6.6
+  google_maps_flutter: ^2.10.0
+  http: ^1.2.2
+  intl: ^0.19.0
+  mqtt_client: ^10.5.1
+  permission_handler: ^11.3.1
+  pinput: ^5.0.0
+  shared_preferences: ^2.3.2
+  sqflite: ^2.4.1
+  url_launcher: ^6.3.1
+  cupertino_icons: ^1.0.8
+  package_info_plus: ^8.1.1
+  flutter_cache_manager: ^3.4.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # assets:
+  #   - assets/images/map.jpg
+  #   - assets/images/driver.png
+  #   - assets/images/incharge.png
+  #   - assets/images/house_location.png
+  #   - assets/images/bushalt.png
+  #   - assets/images/busrun.png
+  #   - assets/images/companylogo.png
+  #   - assets/images/homeicon.png
+  #   - assets/images/schoolicon.png
+  #   - assets/images/locationmarker.gif
+  #   - assets/images/barline.gif
+
